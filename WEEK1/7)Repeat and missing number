@@ -1,0 +1,50 @@
+vector<int> Solution::repeatedNumber(const vector<int> &A) {
+    int XOR=0;
+    int n=A.size();
+    for(int i=0;i<n;i++)
+    {
+        XOR=XOR^A[i];
+    }
+    for(int i=1;i<=n;i++)
+    {
+        XOR=XOR^i;
+    }
+    int rightmostbit=XOR&(-XOR);
+    int x=0,y=0;
+    for(int i=0;i<n;i++)
+    {
+        if(A[i]&rightmostbit)
+        {
+            x=x^A[i];
+        }
+        else
+        {
+            y=y^A[i];
+        }
+        if(i+1&rightmostbit)
+        {
+            x=x^(i+1);
+        }
+        else
+        {
+            y=y^(i+1);
+        }
+    }
+    vector<int> v;
+   for(int i=0;i<n;i++)
+   {
+       if(x==A[i])
+       {
+           v.push_back(x);
+           v.push_back(y);
+           break;
+       }
+       if(y==A[i])
+       {
+           v.push_back(y);
+           v.push_back(x);
+           break;
+       }
+   }
+    return v;
+}
