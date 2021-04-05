@@ -1,0 +1,46 @@
+class Solution{
+  public:
+    vector<int> find3Numbers(vector<int> arr, int N) {
+        int *smaller=new int[N];
+        int *larger=new int[N];
+        vector<int> v;
+        int minimum=0;
+        int maximum=N-1;
+        smaller[0]=-1;
+        larger[N-1]=-1;
+        for(int i=1;i<N;i++)
+        {
+            if(arr[i]<=arr[minimum])
+            {
+                minimum=i;
+                smaller[i]==-1;
+            }
+            else
+            {
+                smaller[i]=minimum;
+            }
+            int j=N-i-1;
+            if(arr[j]>=arr[maximum])
+            {
+                maximum=j;
+                larger[j]=-1;
+            }
+            else
+            {
+                larger[j]=maximum;
+            }
+        }
+        for(int i=0;i<N;i++)
+        {
+            if(smaller[i]!=-1 && larger[i]!=-1)
+            {
+                v.push_back(arr[smaller[i]]);
+                v.push_back(arr[i]);
+                v.push_back(arr[larger[i]]);
+                break;
+            }
+        }
+        
+        return v;
+    }
+};
