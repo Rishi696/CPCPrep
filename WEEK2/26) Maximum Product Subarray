@@ -1,0 +1,29 @@
+class Solution{
+public:
+
+	// Function to find maximum product subarray
+	long long maxProduct(int *arr, int n) {
+	    long long maxovr=arr[0];
+	    long maxnow=arr[0];
+	    long minnow=arr[0];
+	    for(int i=1;i<n;i++)
+	    {
+	        if(arr[i]==0)
+	        {
+	            maxnow=1;
+	            minnow=1;
+	            continue;
+	        }
+	        long long temp=maxnow;
+	        long long a=arr[i];
+	        maxnow=max(a,max(maxnow*a,minnow*a));
+	        minnow=min(a,min(temp*a,minnow*a));
+	        
+	        if(maxovr<maxnow)
+	        {
+	            maxovr=maxnow;
+	        }
+	    }
+	    return maxovr;
+	}
+};
