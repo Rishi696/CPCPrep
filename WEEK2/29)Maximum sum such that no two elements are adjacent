@@ -1,0 +1,25 @@
+class Solution{
+    public:
+    // Function to return maximum of sum without adjacent elements
+    ll FindMaxSum(ll arr[], ll n)
+    {
+        ll inc=arr[0];
+        ll exc=0;
+        ll newexc=0;
+        for(ll i=1;i<n;i++)
+        {
+            newexc=max(exc,inc);
+            
+            inc=exc+arr[i];
+            exc=newexc;
+        }
+        if(exc>inc)
+        {
+            return exc;
+        }
+        else
+        {
+            return inc;
+        }
+    }
+};
