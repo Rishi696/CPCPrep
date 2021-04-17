@@ -1,0 +1,9 @@
+void printreverse(Node* head)
+{
+    if(head==NULL)
+    {
+        return;
+    }
+    printreverse(head->next);
+    cout<<head->data;
+}
