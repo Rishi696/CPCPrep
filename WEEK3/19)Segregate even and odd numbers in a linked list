@@ -1,0 +1,38 @@
+Node* divide(int N, Node *head){
+        Node *ODDd=new Node(-1);
+        Node *EVENd=new Node(-1);
+        Node *odd=ODDd;
+        Node *even=EVENd;
+        Node *curr=head;
+        Node *prev=NULL;
+        while(curr)
+        {
+            if((curr->data)%2!=0)
+            {
+                odd->next=curr;
+                prev=curr;
+                curr=curr->next;
+                prev->next=NULL;
+                odd=odd->next;
+            }
+            else
+            {
+                even->next=curr;
+                prev=curr;
+                curr=curr->next;
+                prev->next=NULL;
+                even=even->next;
+            }
+        }
+        if(EVENd->next!=NULL)
+        {
+            head=EVENd->next;
+            even->next=ODDd->next;
+        }
+        else
+        {
+            head=ODDd->next;
+        }
+        return head;
+    }
+};
