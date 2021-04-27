@@ -1,0 +1,38 @@
+struct Node* arrange(Node *head)
+{
+   Node *VOWELd=new Node(-1);
+   Node *CONSONANTd=new Node(-1);
+   Node *vowel=VOWELd;
+   Node *consonant=CONSONANTd;
+   Node *curr=head;
+   Node *prev=NULL;
+   while(curr)
+   {
+       if(curr->data=='a' || curr->data=='e' ||curr->data=='i' ||curr->data=='o' || curr->data=='u')
+       {
+           vowel->next=curr;
+           prev=curr;
+           curr=curr->next;
+           prev->next=NULL;
+           vowel=vowel->next;
+        }
+        else
+        {
+           consonant->next=curr;
+           prev=curr;
+           curr=curr->next;
+           prev->next=NULL;
+           consonant=consonant->next;
+        }
+   }
+   if(VOWELd->next)
+   {
+       head=VOWELd->next;
+       vowel->next=CONSONANTd->next;
+   }
+   else
+   {
+       head=CONSONANTd->next;
+   }
+   return head;
+}
