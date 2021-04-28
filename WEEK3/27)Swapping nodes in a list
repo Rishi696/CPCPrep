@@ -1,0 +1,21 @@
+ListNode* swapNodes(ListNode* head, int k) {
+        ListNode *temp=head;
+        vector<int> v;
+        int count=0;
+        while(temp)
+        {
+            v.push_back(temp->val);
+            temp=temp->next;
+            count++;
+        }
+        swap(v[k-1],v[count-k]);
+        int i=0;
+        ListNode *t=head;
+        while(t)
+        {
+            t->val=v[i];
+            i++;
+            t=t->next;
+        }
+        return head;
+    }
