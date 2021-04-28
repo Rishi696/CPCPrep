@@ -1,0 +1,49 @@
+ListNode* merge(ListNode *l,ListNode *r)
+    {
+        ListNode *temphead=new ListNode(0);
+        ListNode *curr=temphead;
+        while(l && r)
+        {
+            if(l->val > r->val)
+            {
+                curr->next=r;
+                r=r->next;
+            }
+            else
+            {
+                curr->next=l;
+                l=l->next;
+            }
+            curr=curr->next;
+        }
+        if(l)
+        {
+            curr->next=l;
+            l=l->next;
+        }
+        if(r)
+        {
+            curr->next=r;
+            r=r->next;
+        }
+        return temphead->next;
+    }
+    ListNode* sortList(ListNode* head) {
+        if(head==NULL || head->next==NULL)
+        {
+            return head;
+        }
+        ListNode *temp;
+        ListNode *slow=head;
+        ListNode *fast=head;
+        while(fast && fast->next)
+        {
+               temp=slow;
+               slow=slow->next;
+               fast=fast->next->next;
+        }
+        temp->next=NULL;
+        ListNode *left_sort=sortList(head);
+        ListNode *right_sort=sortList(slow);
+        return merge(left_sort,right_sort);
+    }
