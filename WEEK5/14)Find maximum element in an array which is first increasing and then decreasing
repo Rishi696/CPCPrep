@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// function to find the maximum element
+int findMaximum(int arr[], int low, int h)
+{
+    int high=h+1;
+    if(arr[0]>arr[1])
+    {
+      return arr[0];
+    }
+  if(arr[h]>arr[h-1])
+  {
+    return arr[h];
+    }
+	while(low+1<high)
+    {
+      int mid=low+(high-low)/2;
+      if(arr[mid]<=arr[mid+1])
+      {
+        low=mid;
+      }
+      else
+      {
+        high=mid;
+      }
+    }
+      return arr[high];
+}
+
+/* Driver code*/
+int main()
+{
+	int arr[] = {0, 100, 160, 157, 150};
+	int n = sizeof(arr)/sizeof(arr[0]);
+	cout << "The maximum element is " << findMaximum(arr, 0, n-1);
+	return 0;
+}
