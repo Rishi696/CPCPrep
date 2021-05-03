@@ -1,0 +1,56 @@
+class Solution{
+public:	
+	/* if x is present in arr[] then returns the count
+		of occurrences of x, otherwise returns 0. */
+		
+	int findfirstoccurence(int arr[],int n,int x)
+	{
+	    int s=0,e=n-1;
+	    if(x<arr[s] || x>arr[e])
+	    {
+	        return -1;
+	    }
+	    while(s<e)
+	    {
+	        int mid=s+(e-s)/2;
+	        if(arr[mid]>=x)
+	        {
+	            e=mid;
+	        }
+	        else
+	        {
+	            s=mid+1;
+	        }
+	    }
+	    return s;
+	}
+	int findlastoccurence(int arr[],int n,int x)
+	{
+	    int s=0,e=n-1;
+	    if(x<arr[s] || x>arr[e])
+	    {
+	        return -1;
+	    }
+	    while(s<e)
+	    {
+	        int mid=1+s+(e-s)/2;
+	        if(arr[mid]<=x)
+	        {
+	            s=mid;
+	        }
+	        else
+	        {
+	            e=mid-1;
+	        }
+	    }
+	    return s;
+	}
+	int count(int arr[], int n, int x) {
+	    int i1=findfirstoccurence(arr,n,x);
+	    int i2=findlastoccurence(arr,n,x);
+	    if(i1==-1 || i2==-1)
+	    return 0;
+	    return i2-i1+1;
+	    
+	}
+};
