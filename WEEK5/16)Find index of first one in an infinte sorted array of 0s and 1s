@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// function to find the index of first '1'
+// binary search technique is applied
+int indexOfFirstOne(int arr[], int low, int high)
+{
+  while(low<high)
+  {
+    int mid=low+(high-low)/2;
+    if(arr[mid]==0)
+    {
+      low=mid+1;
+    }
+    else
+    {
+      high=mid;
+    }
+  }
+    return high;
+}
+
+// function to find the index of first 1 in
+// an infinite sorted array of 0's and 1's
+int posOfFirstOne(int arr[])
+{
+  int s=0;
+  int e=1;
+  while(arr[e]<1)
+  {
+    s=e;
+    e=e*2;
+  }
+  int index;
+  index=indexOfFirstOne(arr,s,e);
+  return index;
+}
+
+// Driver program to test above
+int main()
+{
+	int arr[] = { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 };
+	cout << "Index = "
+		<< posOfFirstOne(arr);
+	return 0;
+}
