@@ -1,34 +1,46 @@
-int Solution::threeSumClosest(vector<int> &A, int B) {
-    sort(A.begin(),A.end());
-    int n=A.size();
-    int m=INT_MAX;
-    int closestsum=INT_MAX;
-    for(int i=0;i<n-2;i++)
-    {
-        int l=i+1;
-        int r=n-1;
-        while(l<r)
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+         vector<vector<int>> v;
+        if(nums.size()<4)
         {
-            int sum=A[i]+A[l]+A[r];
-            if(abs(B-sum)<m)
-            {
-                m=abs(B-sum);
-                closestsum=A[i]+A[l]+A[r];
-            }
-            
-            if(sum==B)
-            {
-                return sum;
-            }
-            else if(sum>B)
-            {
-                r--;
-            }
-            else if(sum<B)
-            {
-                l++;
-            }
+            return v;
         }
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        for(int i=0;i<n-3;i++)
+        {
+            for(int j=i+1;j<n-2;j++)
+            {
+                int l=j+1,r=n-1;
+                while(l<r)
+                {
+                    if(nums[i]+nums[j]+nums[l]+nums[r]==target)
+                    {
+                        v.push_back({nums[i],nums[j],nums[l],nums[r]});
+                        while(l<n-1 && nums[l]==nums[l+1])
+                            l++;
+                        while(r>j+1 && nums[r]==nums[r-1])
+                            r--;
+                        l++;
+                        r--;
+                    }
+                    else if(nums[i]+nums[j]+nums[l]+nums[r]>target)
+                    {
+                        r--;
+                    }
+                    else
+                    {
+                        l++;
+                    }
+                }
+                while(j<n-2 && nums[j]==nums[j+1])
+                    j++;
+            }
+            while(i<n-3 && nums[i]==nums[i+1])
+                i++;
+        }
+        return v;
     }
-    return closestsum;
-}
+        
+};
