@@ -1,0 +1,31 @@
+class Solution{
+	
+	public:
+	vector<int> downwardDigonal(int n, vector<vector<int>> A)
+	{
+	    vector<int> v;
+		int m = A.size();
+		for(int k=0;k<n;k++)
+		{
+		    int i=0,j=k;
+		    while(j>=0)
+		    {
+		        v.push_back(A[i][j]);
+		        i++;
+		        j--;
+		    }
+		}
+		for(int k=1;k<n;k++)
+		{
+		    int j=n-1,i=k;
+		    while(i<=n-1)
+		    {
+		        v.push_back(A[i][j]);
+		        i++;
+		        j--;
+		    }
+		}
+		return v;
+	}
+
+};
