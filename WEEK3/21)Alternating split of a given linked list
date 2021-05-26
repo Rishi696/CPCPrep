@@ -1,0 +1,39 @@
+void alternatingSplitList(struct Node* head) 
+{
+    Node *aa=new Node(-1);
+    Node *bb=new Node(-1);
+    Node *A=aa;
+    Node *B=bb;
+    Node *curr=head;
+    bool alternate=true;
+    Node *prev=NULL;
+    if(!head->next)
+    {
+        a=head;
+        return;
+    }
+    while(curr)
+    {
+        if(alternate)
+        {
+            A->next=curr;
+            prev=curr;
+            curr=curr->next;
+            prev->next=NULL;
+            A=A->next;
+            alternate=false;
+        }
+        else
+        {
+            B->next=curr;
+            prev=curr;
+            curr=curr->next;
+            prev->next=NULL;
+            B=B->next;
+            alternate=true;
+        }
+    }
+    a=aa->next;
+    b=bb->next;
+    
+}
