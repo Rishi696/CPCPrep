@@ -1,0 +1,36 @@
+class Solution{
+  public:
+    /*You are required to complete this function*/
+    int getLevelDiff(Node *root)
+    {
+       int oddsum=0;
+       int evensum=0;
+       int res=0;
+       queue<Node*> q;
+       q.push(root);
+       int level=0;
+       while(!q.empty())
+       {
+           int size=q.size();
+           level+=1;
+           while(size)
+           {
+               Node *front=q.front();
+               q.pop();
+               if(level%2==0)
+               {
+                   evensum+=front->data;
+               }
+               else
+               {
+                   oddsum+=front->data;
+               }
+               if(front->left) q.push(front->left);
+               if(front->right) q.push(front->right);
+               size--;
+            }
+        }
+        res=oddsum-evensum;
+        return res;
+    }
+};
