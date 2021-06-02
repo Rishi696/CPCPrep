@@ -1,0 +1,29 @@
+class Solution{
+  public:
+    void getverticalsum(Node *root,int d,map<int,int> &m)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        getverticalsum(root->left,d-1,m);
+        m[d]+=root->data;
+        getverticalsum(root->right,d+1,m);
+        
+    }
+    vector <int> verticalSum(Node *root) {
+        if(root==NULL)
+        {
+            return {};
+        }
+        vector<int> ans;
+        map<int,int> m;
+        getverticalsum(root,0,m);
+        for(auto it=m.begin();it!=m.end();it++)
+        {
+            ans.push_back(it->second);
+        }
+        return ans;
+    }
+};
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
