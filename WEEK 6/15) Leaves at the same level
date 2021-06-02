@@ -1,0 +1,28 @@
+class Solution{
+  public:
+    /*You are required to complete this method*/
+    bool samelevel(Node *root,int level,int &md)
+    {
+        if(root==NULL)
+        {
+            return true;
+        }
+        if(!root->left && !root->right)
+        {
+            if(md==INT_MIN)
+            {
+                md=level;
+            }
+            else if(md!=level)
+            {
+                return false;
+            }
+        }
+        return samelevel(root->left,level+1,md) && samelevel(root->right,level+1,md);
+    }
+    bool check(Node *root)
+    {
+        int maxdepth=INT_MIN;
+        return samelevel(root,1,maxdepth);
+    }
+};
