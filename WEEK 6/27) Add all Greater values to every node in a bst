@@ -1,0 +1,16 @@
+Node* mod(Node *root,int &sum)
+{
+    if(root==NULL) return NULL;
+    mod(root->right,sum);
+    sum+=root->data;
+    root->data=sum;
+    mod(root->left,sum);
+    return root;
+}
+Node* modify(Node *root)
+{
+    if(root==NULL) return NULL;
+    int sum=0;
+    root=mod(root,sum);
+    return root;
+}
