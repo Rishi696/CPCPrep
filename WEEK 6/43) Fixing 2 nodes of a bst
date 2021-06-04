@@ -1,0 +1,47 @@
+class Solution {
+public:
+    void correct(Node *root,Node **first,Node **last,Node **middle,Node **prev)
+    {
+        if(root==NULL) return;
+        correct(root->left,first,last,middle,prev);
+        if(*prev!=NULL)
+        {
+            if((*prev)->data > root->data)
+            {
+                if(*first==NULL)
+                {
+                    *first=*prev;
+                    *middle=root;
+                }
+                else
+                {
+                    *last=root;
+                }
+            }
+        }
+        *prev=root;
+        correct(root->right,first,last,middle,prev);
+    }
+    void swap(int *a,int *b)
+    {
+        int temp= *a;
+        *a=*b;
+        *b=temp;
+    }
+    void correctBST( struct Node* root )
+    {
+        Node *first=NULL;
+        Node *prev=NULL;
+        Node *last=NULL;
+        Node *middle=NULL;
+        correct(root,&first,&last,&middle,&prev);
+        if(first && last)
+        {
+            swap(&(first->data),&(last->data));
+        }
+        else if(first && middle)
+        {
+            swap(&(first->data),&(middle->data));
+        }
+    }
+};
