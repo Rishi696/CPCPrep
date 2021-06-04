@@ -1,0 +1,15 @@
+void print (Node *root,int low,int high,vector<int> &ans)
+{
+    if(root==NULL) return;
+    if(low<root->data) print(root->left,low,high,ans);
+    if(root->data>=low && root->data<=high) ans.push_back(root->data);
+    if(high>root->data) print(root->right,low,high,ans);
+    
+    
+}
+vector<int> printNearNodes(Node *root, int low, int high)
+{
+    vector<int> ans;
+    print(root,low,high,ans);
+    return ans;
+}
