@@ -1,0 +1,21 @@
+class Solution{
+  public:
+    // Function should return all the ancestor of the target node
+    bool FindAncestor(Node *root,int target,vector<int> &ans)
+    {
+        if(root==NULL) return false;
+        if(root->data==target) return true;
+        if(FindAncestor(root->left,target,ans) || FindAncestor(root->right,target,ans))
+        {
+            ans.push_back(root->data);
+            return true;
+        }
+        return false;
+    }
+    vector<int> Ancestors(struct Node *root, int target)
+    {
+        vector<int> ans;
+        FindAncestor(root,target,ans);
+        return ans;
+    }
+};
