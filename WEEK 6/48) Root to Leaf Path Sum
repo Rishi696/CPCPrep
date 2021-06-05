@@ -1,0 +1,21 @@
+class Solution
+{
+    public:
+    void path(Node *root,int sum,int S,bool &ans)
+    {
+        if(root==NULL) return;
+        sum+=root->data;
+        if(root->left==NULL && root->right==NULL && sum==S)
+        {
+            ans=true;
+            return;
+        }
+        path(root->left,sum,S,ans);
+        path(root->right,sum,S,ans);
+    }
+    bool hasPathSum(Node *root, int S) {
+        bool ans=false;
+    path(root,0,S,ans);
+    return ans;
+}
+};
