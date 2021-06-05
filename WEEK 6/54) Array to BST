@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void converttoBST(vector<int> &nums,int left,int right,vector<int> &pre)
+    {
+        if(left>right)
+        {
+            return;
+        }
+        int mid=left+(right-left)/2;
+        pre.push_back(nums[mid]);
+        converttoBST(nums,left,mid-1,pre);
+        converttoBST(nums,mid+1,right,pre);
+    }
+    
+    vector<int> sortedArrayToBST(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> pre;
+        converttoBST(nums,0,n-1,pre);
+        
+    
+        return pre;
+    }
+};
