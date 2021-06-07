@@ -1,0 +1,15 @@
+bool solve(int n, vector<vector<int>>& friends) {
+    vector<bool> s(n,false);
+    int size=friends.size();
+    for(int i=0;i<size;i++)
+    {
+        s[friends[i][0]]=true;
+        s[friends[i][1]]=true;
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(!s[i])
+        return false;
+    }
+    return true;
+}
