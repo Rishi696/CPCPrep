@@ -1,0 +1,25 @@
+void dfs(int src,vector<vector<int>> &friends,vector<int> &visited)
+{
+    visited[src]=1;
+    for(int j=0;j<friends[src].size();j++)
+    {
+        if(!visited[friends[src][j]])
+        {
+            dfs(friends[src][j],friends,visited);
+        }
+    }
+}
+int solve(vector<vector<int>>& friends) {
+    int n=friends.size();
+    vector<int> visited(n,0);
+    int count=0;
+    for(int i=0;i<n;i++)
+    {
+        if(!visited[i])
+        {
+            dfs(i,friends,visited);
+            count++;
+        }
+    }
+    return count;
+}
