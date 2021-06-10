@@ -1,0 +1,40 @@
+class Solution 
+{
+    public:
+    //Function to detect cycle in an undirected graph.
+    bool dfs(int src,int par,vector<int> adj[],vector<int> &visited)
+    {
+        visited[src]=1;
+        for(auto it:adj[src])
+        {
+            if(!visited[it])
+            {
+                if(dfs(it,src,adj,visited))
+                {
+                    return true;
+                }
+            }
+            else if(it!=par)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+	bool isCycle(int V, vector<int>adj[])
+	{
+	    vector<int> visited(V,0);
+	    for(int i=0;i<V;i++)
+	    {
+	        if(!visited[i])
+	        {
+	           bool x=dfs(i,-1,adj,visited);
+	           if(x)
+	           {
+    	           return true;
+	           }
+	        }
+	    }
+	    return false;
+	}
+};
