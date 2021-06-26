@@ -1,0 +1,59 @@
+class Solution
+{
+    public:
+    //Function to find the length of longest common subsequence in two strings.
+    int dp[1001][1001];
+    int lcs(int x, int y, string s1, string s2)
+    {
+        int i,j;
+        for(i=0;i<=x;i++)
+        {
+            dp[0][i]=0;
+        }
+        for(i=0;i<=y;i++)
+        {
+            dp[i][0]=0;
+        }
+        for(i=1;i<=x;i++)
+        {
+            for(int j=1;j<=y;j++)
+            {
+                if(s1[i-1]==s2[j-1])
+                {
+                    dp[i][j]=1+dp[i-1][j-1];
+                }
+                else
+                {
+                    dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+        int a=x;
+        int b=y;
+        vector<char> ans;
+        while(x>0 || y>0)
+        {
+            if(s1[x-1]==s2[y-1])
+            {
+                ans.push_back(s1[x-1]);
+                x--;
+                y--;
+            }
+            else
+            {
+                if(dp[x-1][y]>dp[x][y-1])
+                {
+                    x--;
+                }
+                else
+                {
+                    y--;
+                }
+            }
+        }
+        for(int q=0;q<ans.size();q++)
+        {
+            cout<<ans[q];
+        }
+    }
+};
