@@ -1,0 +1,23 @@
+class Solution
+{
+    public:
+    int dp[10001];
+    //Function to find the maximum number of cuts.
+    int findmaxcuts(int n,int x,int y,int z)
+    {
+        if(n==0) return 0;
+        if(dp[n]!=-1) return dp[n];
+        int o1=INT_MIN,o2=INT_MIN,o3=INT_MIN;
+        if(n>=x) o1=findmaxcuts(n-x,x,y,z);
+        if(n>=y) o2=findmaxcuts(n-y,x,y,z);
+        if(n>=z) o3=findmaxcuts(n-z,x,y,z);
+        return dp[n]=1+max(o1,max(o2,o3));
+    }
+    int maximizeTheCuts(int n, int x, int y, int z)
+    {
+        memset(dp,-1,sizeof(dp));
+        int a=findmaxcuts(n,x,y,z);
+        if(a<0) return 0;
+        return a;
+    }
+};
