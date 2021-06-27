@@ -1,0 +1,48 @@
+class Solution
+{
+    public:
+    //Function to find length of longest increasing subsequence.
+    int longestSubsequence(int n, int a[])
+    {
+       int dp[n];
+       for(int i=0;i<n;i++)
+       {
+           dp[i]=1;
+       }
+       int i,j;
+       for(int i=1;i<n;i++)
+       {
+           for(int j=0;j<i;j++)
+           {
+               if(a[i]>a[j])
+               {
+                   dp[i]=max(dp[i],dp[j]+1);
+               }
+           }
+       }
+       int lis=INT_MIN;
+       int lis_index=0;
+       for(int i=0;i<n;i++)
+       {
+           if(lis<dp[i])
+           {
+               lis=dp[i];
+               lis_index=i;
+           }
+       }
+       vector<int> ans;
+       ans.push_back(a[lis_index]);
+       for(int i=lis_index-1;i>=0;i--)
+       {
+           if(dp[i]+1==dp[lis_index] && a[lis_index]>a[i])
+           {
+               lis_index=i;
+               ans.push_back(a[lis_index]);
+           }
+       }
+       for(int i=ans.size()-1;i>=0;i--)
+       {
+           cout<<ans[i]<<" ";
+       }
+    }
+};
