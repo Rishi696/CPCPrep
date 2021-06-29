@@ -1,0 +1,33 @@
+int Solution::atoi(const string str) {
+    int len=str.length();
+    int i=0;
+    while(i<len && str[i]==' ') i++;
+    int sign=1;//positive
+    if(str[i]=='-') 
+    {
+        sign=0;//negative
+        i++;
+    }
+    else if(str[i]=='+') i++;//positive
+    int result=0;
+    int num;
+    while(str[i]>='0' && str[i]<='9')
+    {
+        result=result*10;
+        if(result<=INT_MIN && result>=INT_MAX) 
+        {
+            break;
+        }
+        num=str[i]-'0';
+        result=result+num;
+    }
+    if(sign==0)
+    {
+        result*=-1;
+    }
+    if(result<=INT_MIN) return INT_MIN;
+    if(result>=INT_MAX) return INT_MAX;
+    return result;
+    
+    
+}
