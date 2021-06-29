@@ -1,0 +1,32 @@
+class Solution
+{
+    public:
+    //Function to find the first non-repeating character in a string.
+    char nonrepeatingCharacter(string S)
+    {
+       unordered_map<char,int> m;
+       for(int i=0;i<S.size();i++)
+       {
+           if(m.find(S[i])!=m.end())
+           {
+               m[S[i]]++;
+           }
+           else
+           {
+               m.insert({S[i],1});
+           }
+       }
+       char ans='$';
+       for(int i=0;i<S.size();i++)
+       {
+           if(m[S[i]]==1)
+           {
+               ans=S[i];
+               break;
+           }
+       }
+       
+       return ans;
+    }
+
+};
