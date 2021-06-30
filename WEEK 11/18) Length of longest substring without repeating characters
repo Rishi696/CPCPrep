@@ -1,0 +1,40 @@
+class Solution{
+    public:
+    int longestUniqueSubsttr(string S){
+int i=0,j=0;
+        int n=S.size();
+        unordered_map<char,int> map;
+        int maximum=-1;
+        while(j<n)
+        {
+            if(map.find(S[j])!=map.end())
+            {
+                map[S[j]]++;
+            }
+            else
+            {
+                map.insert({S[j],1});
+            }
+            if(map.size()==j-i+1)
+            {
+                maximum=max(maximum,j-i+1);
+                j++;
+            }
+            else if(map.size()<j-i+1)
+            {
+                while(map.size()<j-i+1)
+                {
+                    map[S[i]]--;
+                    if(map[S[i]]==0)
+                    {
+                        map.erase(S[i]);
+                    }
+                    i++;
+                }
+                j++;
+            }
+        }
+        return maximum;
+       
+    }
+};
