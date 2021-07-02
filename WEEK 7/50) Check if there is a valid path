@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool hasValidPath(vector<vector<int>>& grid) {
+        vector<vector<vector<int>>> directions({
+            {{0, -1}, {0, 1}},
+            {{-1, 0}, {1, 0}},
+            {{0, -1}, {1, 0}},
+            {{0, 1}, {1, 0}},
+            {{0, -1}, {-1, 0}},
+            {{0, 1}, {-1, 0}}
+        });
+        queue<pair<int,int>> q;
+        int m=grid.size();
+        int n=grid[0].size();
+        vector<vector<bool>> visited(m,vector<bool>(n, false));
+        q.push({0,0});
+        visited[0][0]=true;
+        while(!q.empty())
+        {
+            pair<int,int> front=q.front();
+            q.pop();
+            int curr_x=front.first;
+            int curr_y=front.second;
+            for(auto it:directions[grid[curr_x][curr_y]-1])
+            {
+                int new_x=0,new_y=0;
+                new_x=curr_x+it[0];
+                new_y=curr_y+it[1];
+                if(new_x>=0 && new_y>=0 && new_x<m && new_y<n && visited[new_x][new_y]==0)
+                {
+                    for(auto jt:directions[grid[new_x][new_y]-1])
+                    {
+                        if(new_x+jt[0]==curr_x && new_y+jt[1]==curr_y)
+                        {
+                            visited[new_x][new_y]=true;
+                            q.push({new_x,new_y});
+                        }
+                    }
+                }
+            }
+        }
+        return visited[m-1][n-1];
+    }
+};
