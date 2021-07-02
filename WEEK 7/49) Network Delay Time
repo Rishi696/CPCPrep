@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+        vector<pair<int,int>> graph[n+1];
+        int edges=times.size();
+        for(int i=0;i<edges;i++)
+        {
+            graph[times[i][0]].push_back({times[i][2],times[i][1]});
+        }
+        vector<int> dist(n+1,INT_MAX);
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        pq.push({0,k});
+        dist[k]=0;
+        while(!pq.empty())
+        {
+            pair<int,int> u=pq.top();
+            pq.pop();
+            for(auto v:graph[u.second])
+            {
+                if(dist[u.second]+v.first<dist[v.second])
+                {
+                    dist[v.second]=dist[u.second]+v.first;
+                    pq.push({dist[v.second],v.second});
+                }
+            }
+        }
+        int maximum=INT_MIN;
+        for(int i=1;i<=n;i++)
+        {
+            maximum=max(maximum,dist[i]);
+        }
+        if(maximum==INT_MAX) return -1;
+        return maximum;
+    }
+};
